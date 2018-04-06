@@ -8,31 +8,64 @@ var key_jump = keyboard_check_pressed((vk_space));
 
 // Calculate movement
 var move = key_right - key_left;
-_horizontalSpeed = move * _walkSpeed * global.delta;
+
+if(_grounded) {
+	if(move != 0) {
+		// Add speed
+		_horizontalSpeed += move * _groundSpeed * global.delta;
+		// Softcap it here so speed is not faster than softcap
+		_horizontalSpeed = clamp(_horizontalSpeed, -_groundSpeedSoftCap * global.delta, _groundSpeedSoftCap * global.delta);
+	}
+	
+	// Add friction relative to anlogue movement
+	var frictionToAdd = 1 - abs(move);
+	if(_horizontalSpeed > 0) {
+		_horizontalSpeed -= frictionToAdd * _groundFriction * global.delta;
+		_horizontalSpeed = max(_horizontalSpeed, 0);
+	}
+	else {
+		_horizontalSpeed += frictionToAdd * _groundFriction * global.delta;
+		_horizontalSpeed = min(_horizontalSpeed, 0);
+	}	
+	
+	// Softcap speed
+	if(_horizontalSpeed > _groundSpeedSoftCap) {
+		_horizontalSpeed = max(_horizontalSpeed - (_groundFriction * global.delta), _groundSpeedSoftCap * global.delta); 
+	}
+	else if(_horizontalSpeed < -_groundSpeedSoftCap) {
+		_horizontalSpeed = min(_horizontalSpeed + (_groundFriction * global.delta), -_groundSpeedSoftCap * global.delta);
+	}
+
+	// Hardcap speed
+	_horizontalSpeed = clamp(_horizontalSpeed, -_groundSpeedHardCap * global.delta, _groundSpeedHardCap * global.delta);
+}
+
+
+// Vertical movement
 _verticalSpeed += _gravity * global.delta; // Gravity
 
 // Jump
-_grounded = place_meeting(x, y+1, obj_background);
+_grounded = place_meeting(x, y+1, obj_wall);
 
 if(_grounded) {
-	_doubleJumped = false;	
+	_flying = false;	
 }
 if(key_jump) 
 {
-	_doubleJumped = false;
+	_flying = false;
 	if(_grounded)
 		_verticalSpeed = -sqrt(2 * _jumpHeight * _gravity * global.delta);
-	else if(!_grounded && !_doubleJumped) 
+	else if(!_grounded && !_flying) 
 	{
 		_verticalSpeed = -sqrt(2 * _jumpHeight * _gravity * global.delta);
-		_doubleJumped = true;
+		_flying = true;
 	}
 }
 
 // Horizontal collision
-if(place_meeting(x+_horizontalSpeed, y, obj_background)) 
+if(place_meeting(x+_horizontalSpeed, y, obj_wall)) 
 {
-	while(!place_meeting(x+sign(_horizontalSpeed), y, obj_background))
+	while(!place_meeting(x+sign(_horizontalSpeed), y, obj_wall))
 	{
 		x += sign(_horizontalSpeed);
 	}
@@ -41,9 +74,9 @@ if(place_meeting(x+_horizontalSpeed, y, obj_background))
 x += _horizontalSpeed;
 
 // Vertical collision
-if(place_meeting(x, y+_verticalSpeed, obj_background)) 
+if(place_meeting(x, y+_verticalSpeed, obj_wall)) 
 {
-	while(!place_meeting(x, y+sign(_verticalSpeed), obj_background))
+	while(!place_meeting(x, y+sign(_verticalSpeed), obj_wall))
 	{
 		y += sign(_verticalSpeed);
 	}
@@ -54,7 +87,7 @@ y += _verticalSpeed;
 // Animation
 if(!_grounded) 
 {
-	if(_doubleJumped) {
+	if(_flying) {
 		sprite_index =  spr_RubeFly;
 	}
 	else {
@@ -76,7 +109,18 @@ else
 	}
 }
 
-if(sign(_horizontalSpeed) != 0) 
+
+
+// Flip
+if(_facingRight &&  _horizontalSpeed < 0) 
 {
-	image_xscale = sign(_horizontalSpeed);
+	_facingRight = false;
+	x--;
+	image_xscale = -1;
+}
+else if (!_facingRight &&  _horizontalSpeed > 0)
+{
+	_facingRight = true;
+	x++;
+	image_xscale = 1;
 }
