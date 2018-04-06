@@ -79,14 +79,6 @@
             }
         },
         {
-            "Key": "382b261e-62d3-455c-864b-e197ea793001",
-            "Value": {
-                "id": "8706bd98-df9b-46dd-97fd-846fd51b7884",
-                "resourcePath": "objects\\obj_Rube\\obj_Rube.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
             "Key": "43e9d32d-98e4-406a-b1cf-0133a8b29be3",
             "Value": {
                 "id": "68f5574c-b753-4aa8-a63b-e0eb5471a0fd",
@@ -107,14 +99,6 @@
             "Value": {
                 "id": "4b03728d-beb5-4d0a-887d-16233f0cbd33",
                 "resourcePath": "objects\\obj_background\\obj_background.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
-            "Key": "6a95b8d7-ef98-47a4-9f21-b3ba63bf9ae5",
-            "Value": {
-                "id": "4fc81b2e-f2d5-4b34-858b-fef51ea6f269",
-                "resourcePath": "objects\\obj_Rube1\\obj_Rube1.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -186,7 +170,7 @@
             "Key": "a3b3d7ad-6cc1-4ab0-924e-5b19f6e2df3e",
             "Value": {
                 "id": "56836aad-3632-4730-91e4-a01abf2ed3f6",
-                "resourcePath": "objects\\obj_Rube2\\obj_Rube2.yy",
+                "resourcePath": "objects\\obj_Rube\\obj_Rube.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -247,6 +231,14 @@
             }
         },
         {
+            "Key": "d17822a7-2756-4155-9ee5-6738f8a45c77",
+            "Value": {
+                "id": "c5906672-5f89-4763-a44a-b751d691c9af",
+                "resourcePath": "objects\\obj_wall\\obj_wall.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "d18ac8ac-c5c0-4d7e-b531-1b27d6f7a462",
             "Value": {
                 "id": "02f0567a-63e8-41de-a629-69a40a16574e",
@@ -285,10 +277,18 @@
                 "resourcePath": "views\\e5bd0f4f-51f7-49fb-ad39-3f6ecfe5314f.yy",
                 "resourceType": "GMFolder"
             }
+        },
+        {
+            "Key": "f8268979-693f-459c-bd27-93636917c1ec",
+            "Value": {
+                "id": "111d7198-4932-4972-bd95-c9f175a4067b",
+                "resourcePath": "scripts\\RubeHorizontalMovement\\RubeHorizontalMovement.yy",
+                "resourceType": "GMScript"
+            }
         }
     ],
     "script_order": [
-        
+        "f8268979-693f-459c-bd27-93636917c1ec"
     ],
     "tutorial": "com.YoYoGames.GMBasicsTheImageEditor"
 }

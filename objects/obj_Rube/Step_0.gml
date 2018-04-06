@@ -2,63 +2,89 @@
 // You can write your code in this editor
 
 // Get Player Input
-key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
-key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
-key_jump = keyboard_check_pressed((vk_space));
+var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
+var key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
+var key_jump = keyboard_check_pressed(vk_space);
 
 // Calculate movement
 var move = key_right - key_left;
-hsp += move * walksp * 0.1;
-vsp += grv; // Gravity
+
+if(_grounded) {
+	_horizontalSpeed = RubeHorizontalMovement(_horizontalSpeed, move, _groundSpeed, _groundSpeedSoftCap, _groundSpeedHardCap, _groundFriction);
+}
+else { // Airborne
+	_horizontalSpeed = RubeHorizontalMovement(_horizontalSpeed, move, _airSpeed, _airSpeedSoftCap, _airSpeedHardCap, _airSpeedFriction);
+}
+
+
+// Vertical movement
+_verticalSpeed += _gravity * global.delta; // Gravity
 
 // Jump
-grounded = place_meeting(x, y+1, obj_background);
+_grounded = place_meeting(x, y+1, obj_wall);
 
-if(grounded) {
-	doubleJumped = false;	
+if(_grounded) {
+	_flying = false;
+	_flightMeter = 1.0;
 }
+
+if(_flying) {
+	_flightMeter -= global.delta / _flightTime;
+	_verticalSpeed -= _flightVerticalBoostPassive *  global.delta;
+	
+	if(_flightMeter <= 0.0) {
+		_flightMeter = 0.0;
+		_flying = false;
+	}
+}
+
 if(key_jump) 
 {
-	doubleJumped = false;
-	if(grounded)
-		vsp = -3;
-	else if(!grounded && !doubleJumped) 
+	if(_grounded)
+		_verticalSpeed = -sqrt(2 * _jumpHeight * _gravity * global.delta);
+	else if(_flying) {
+		_flying = false;
+	}
+	else if(!_grounded && !_flying && _flightMeter > 0.0) 
 	{
-		vsp = -3;
-		doubleJumped = true;
+		_verticalSpeed = -sqrt(2 * _flightVerticalBoostInital * _gravity * global.delta);
+		_horizontalSpeed += move * _flightHorizontalBoostInital * global.delta;
+		_flying = true;
+		
+		_flightMeter -= _flightActivateCost / _flightTime;
 	}
 }
 
 // Horizontal collision
-if(place_meeting(x+hsp, y, obj_background)) 
+if(place_meeting(x+_horizontalSpeed, y, obj_wall)) 
 {
-	while(!place_meeting(x+sign(hsp), y, obj_background))
+	while(!place_meeting(x+sign(_horizontalSpeed), y, obj_wall))
 	{
-		x += sign(hsp);
+		x += sign(_horizontalSpeed);
 	}
-	hsp = 0;
+	_horizontalSpeed = 0;
 }
-x += hsp;
+x += _horizontalSpeed;
 
 // Vertical collision
-if(place_meeting(x, y+vsp, obj_background)) 
+if(place_meeting(x, y+_verticalSpeed, obj_wall)) 
 {
-	while(!place_meeting(x, y+sign(vsp), obj_background))
+	while(!place_meeting(x, y+sign(_verticalSpeed), obj_wall))
 	{
-		y += sign(vsp);
+		y += sign(_verticalSpeed);
 	}
-	vsp = 0;
+	_verticalSpeed = 0;
 }
-y += vsp;
+y += _verticalSpeed;
 
 // Animation
-if(!grounded) 
+if(!_grounded) 
 {
-	if(doubleJumped) {
+	if(_flying) {
 		sprite_index =  spr_RubeFly;
 	}
 	else {
-		if(sign(vsp) > 0)
+		if(sign(_verticalSpeed) > 0)
 			sprite_index = spr_RubeJump;
 		else
 			sprite_index = spr_RubeFall;
@@ -66,7 +92,7 @@ if(!grounded)
 }
 else 
 {
-	if(hsp == 0)
+	if(_horizontalSpeed == 0)
 	{
 		sprite_index = spr_RubeIdle;
 	}
@@ -76,7 +102,18 @@ else
 	}
 }
 
-if(sign(hsp) != 0) 
+
+
+// Flip
+if(_facingRight &&  _horizontalSpeed < 0) 
 {
-	image_xscale = sign(hsp);
+	_facingRight = false;
+	x--;
+	image_xscale = -1;
+}
+else if (!_facingRight &&  _horizontalSpeed > 0)
+{
+	_facingRight = true;
+	x++;
+	image_xscale = 1;
 }

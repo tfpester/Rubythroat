@@ -1,5 +1,5 @@
 {
-    "id": "59cf87fc-484d-4442-ae58-fa95eabc01a8",
+    "id": "d17822a7-2756-4155-9ee5-6738f8a45c77",
     "modelName": "GMObject",
     "mvc": "1.0",
     "name": "obj_wall",
