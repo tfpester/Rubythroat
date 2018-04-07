@@ -55,6 +55,14 @@
             }
         },
         {
+            "Key": "192025b2-a051-43c1-97eb-d94db06ed88f",
+            "Value": {
+                "id": "650fd093-e8da-40e4-b7c0-9166f5585c91",
+                "resourcePath": "views\\192025b2-a051-43c1-97eb-d94db06ed88f.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "27bb3618-d833-4b20-a16d-04d846536e7f",
             "Value": {
                 "id": "4100a371-23a7-44ea-aaa6-ce6c0e1d0bd4",
@@ -122,7 +130,7 @@
             "Key": "8075824d-0d1f-4806-935d-6d530a75189c",
             "Value": {
                 "id": "aba8cbdf-6174-478e-9896-be8a9cb5e600",
-                "resourcePath": "rooms\\TestRoom\\TestRoom.yy",
+                "resourcePath": "rooms\\rm_Test\\rm_Test.yy",
                 "resourceType": "GMRoom"
             }
         },
@@ -132,6 +140,14 @@
                 "id": "e43b10fd-603f-473c-8c8d-aa502771b88b",
                 "resourcePath": "views\\84e5dd37-8742-4c35-8896-9418dab0af9d.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "8674e425-514b-423b-ae09-f41031591c02",
+            "Value": {
+                "id": "6cb1dd45-f025-4273-a87a-07c0dc3c37f7",
+                "resourcePath": "fonts\\fnt_Debug\\fnt_Debug.yy",
+                "resourceType": "GMFont"
             }
         },
         {
@@ -156,6 +172,14 @@
                 "id": "bdeb6fc2-1082-4d16-9f3c-a081872778e3",
                 "resourcePath": "sprites\\spr_RubeIdle\\spr_RubeIdle.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "915647a1-cb36-4dd7-8f0b-210f5b906cad",
+            "Value": {
+                "id": "479d3af2-e7c1-4f9b-b11f-6b57e8571eff",
+                "resourcePath": "objects\\obj_DebugSpeedMeter\\obj_DebugSpeedMeter.yy",
+                "resourceType": "GMObject"
             }
         },
         {

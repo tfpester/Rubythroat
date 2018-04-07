@@ -5,7 +5,7 @@
 var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 var key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 var key_jump = keyboard_check_pressed(vk_space);
-
+var key_fall = keyboard_check_pressed(ord("S"));
 // Calculate movement
 var move = key_right - key_left;
 
@@ -18,7 +18,7 @@ else { // Airborne
 
 
 // Vertical movement
-_verticalSpeed += _gravity * global.delta; // Gravity
+_verticalSpeed += _gravity * global.deltaSq; // Gravity
 
 // Jump
 _grounded = place_meeting(x, y+1, obj_wall);
@@ -30,7 +30,7 @@ if(_grounded) {
 
 if(_flying) {
 	_flightMeter -= global.delta / _flightTime;
-	_verticalSpeed -= _flightVerticalBoostPassive *  global.delta;
+	_verticalSpeed -= _flightVerticalBoostPassive *  global.deltaSq;
 	
 	if(_flightMeter <= 0.0) {
 		_flightMeter = 0.0;
@@ -40,19 +40,22 @@ if(_flying) {
 
 if(key_jump) 
 {
-	if(_grounded)
-		_verticalSpeed = -sqrt(2 * _jumpHeight * _gravity * global.delta);
-	else if(_flying) {
-		_flying = false;
+	if(_grounded) {
+		_verticalSpeed = -sqrt(2 * _jumpHeight * _gravity * global.deltaSq);
 	}
-	else if(!_grounded && !_flying && _flightMeter > 0.0) 
+	else if(!_grounded &&  _flightMeter > 0.0) 
 	{
-		_verticalSpeed = -sqrt(2 * _flightVerticalBoostInital * _gravity * global.delta);
+		//_verticalSpeed = -sqrt(2 * _flightVerticalBoostInital * _gravity * global.deltaSq);
+		_verticalSpeed = -sqrt(2 * _flightVerticalBoostInital * (_gravity - _flightVerticalBoostPassive) * global.deltaSq);
 		_horizontalSpeed += move * _flightHorizontalBoostInital * global.delta;
 		_flying = true;
 		
 		_flightMeter -= _flightActivateCost / _flightTime;
 	}
+}
+
+if(key_fall) {
+	_flying = false;	
 }
 
 // Horizontal collision
@@ -85,9 +88,9 @@ if(!_grounded)
 	}
 	else {
 		if(sign(_verticalSpeed) > 0)
-			sprite_index = spr_RubeJump;
-		else
 			sprite_index = spr_RubeFall;
+		else
+			sprite_index = spr_RubeJump;
 	}
 }
 else 

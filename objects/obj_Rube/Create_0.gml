@@ -3,27 +3,28 @@
 
 _horizontalSpeed = 0;
 _verticalSpeed = 0;
-_gravity = 15;
 
-_groundSpeed = 30;			// Pixels per walking
+_gravity = 500;
+
+_groundSpeed = 450;			// Pixels per walking
 _groundSpeedSoftCap = 100;	// Speed up until you can walk to
 _groundSpeedHardCap = 1000; // Max speed on ground ever
-_groundFriction = 40;		// Loss in speed while on ground past soft cap
+_groundFriction = 600;		// Loss in speed while on ground past soft cap
 
-_airSpeed = 5;			
-_airSpeedSoftCap = 140;
+_airSpeed = 350;			
+_airSpeedSoftCap = 110;
 _airSpeedHardCap = 1000;
-_airSpeedFriction = 0;
+_airSpeedFriction = 10;
 
-_flightHorizontalBoostInital = 30;
+_flightHorizontalBoostInital = 40;
 _flightHorizontalBoostPassive = 1;
-_flightVerticalBoostInital = 3;
-_flightVerticalBoostPassive = 14;
+_flightVerticalBoostInital = 55;
+_flightVerticalBoostPassive = 490;
 
 _jumpHeight = 50;
 
-_flightTime = 7.0;
-_flightActivateCost = 2.0;
+_flightTime = 15.0;
+_flightActivateCost = 1.5;
 _flightMeter = 1.0;
 
 
