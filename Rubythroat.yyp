@@ -31,6 +31,14 @@
     },
     "resources": [
         {
+            "Key": "062715ca-d44b-4979-a8f9-108cb8362bc1",
+            "Value": {
+                "id": "531b3d25-01fb-4ab8-8c4b-073cc9df1bd1",
+                "resourcePath": "sprites\\spr_RubePistolIdle\\spr_RubePistolIdle.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "0671acb3-0480-4909-98f2-ec01461ba0fe",
             "Value": {
                 "id": "4a3ee662-ab1a-4dde-ad82-77c31068d7ed",
@@ -263,6 +271,14 @@
             }
         },
         {
+            "Key": "d173f214-9b2d-44bf-a1c5-3917e1dc79f1",
+            "Value": {
+                "id": "341b75d9-b265-40c2-8995-9463bd3e7bcc",
+                "resourcePath": "views\\d173f214-9b2d-44bf-a1c5-3917e1dc79f1.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "d17822a7-2756-4155-9ee5-6738f8a45c77",
             "Value": {
                 "id": "c5906672-5f89-4763-a44a-b751d691c9af",
@@ -316,6 +332,14 @@
                 "id": "111d7198-4932-4972-bd95-c9f175a4067b",
                 "resourcePath": "scripts\\RubeHorizontalMovement\\RubeHorizontalMovement.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "f8ba5322-e7cb-4a90-b078-2f2f2c4ebb14",
+            "Value": {
+                "id": "e11dc550-3652-427a-941e-1ede3006da27",
+                "resourcePath": "objects\\obj_DebugPosition\\obj_DebugPosition.yy",
+                "resourceType": "GMObject"
             }
         }
     ],

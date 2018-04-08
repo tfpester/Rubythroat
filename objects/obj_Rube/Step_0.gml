@@ -22,7 +22,7 @@ else { // Airborne
 _verticalSpeed += _gravity * global.deltaSq; // Gravity
 
 // Jump
-_grounded = place_meeting(x, y+1, obj_wall);
+_grounded = place_meeting(_x, _y+1, obj_wall);
 
 if(_grounded) {
 	_flying = false;
@@ -64,13 +64,13 @@ if(key_fall) {
 if(!_shieldOn) {
 	if(key_sheild) {
 		_shieldOn = true;
-		_objShield = instance_create_layer(x,y,"Instances",obj_ShieldTest);
+		_objShield = instance_create_layer(_x,_y,"Instances",obj_ShieldTest);
 	}
 }
 else {
 	if(key_sheild) {
-		_objShield.x = x;
-		_objShield.y = y;
+		_objShield._x = _x;
+		_objShield._y = _y;
 	}
 	else {
 		_shieldOn = false;
@@ -79,26 +79,29 @@ else {
 }
 
 // Horizontal collision
-if(place_meeting(x+_horizontalSpeed, y, obj_wall)) 
+if(place_meeting(_x+_horizontalSpeed, _y, obj_wall)) 
 {
-	while(!place_meeting(x+sign(_horizontalSpeed), y, obj_wall))
+	while(!place_meeting(_x+sign(_horizontalSpeed), _y, obj_wall))
 	{
-		x += sign(_horizontalSpeed);
+		_x += sign(_horizontalSpeed);
 	}
 	_horizontalSpeed = 0;
 }
-x += _horizontalSpeed;
+_x += _horizontalSpeed;
 
 // Vertical collision
-if(place_meeting(x, y+_verticalSpeed, obj_wall)) 
+if(place_meeting(_x, _y+_verticalSpeed, obj_wall)) 
 {
-	while(!place_meeting(x, y+sign(_verticalSpeed), obj_wall))
+	while(!place_meeting(_x, _y+sign(_verticalSpeed), obj_wall))
 	{
-		y += sign(_verticalSpeed);
+		_y += sign(_verticalSpeed);
 	}
 	_verticalSpeed = 0;
 }
-y += _verticalSpeed;
+_y += _verticalSpeed;
+
+x = floor(_x);
+y = floor(_y);
 
 // Animation
 if(!_grounded) 
@@ -131,12 +134,12 @@ else
 if(_facingRight &&  move < 0) 
 {
 	_facingRight = false;
-	x--;
+	_x--;
 	image_xscale = -1;
 }
 else if (!_facingRight &&  move > 0)
 {
 	_facingRight = true;
-	x++;
+	_x++;
 	image_xscale = 1;
 }
