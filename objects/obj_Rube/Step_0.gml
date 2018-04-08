@@ -6,6 +6,8 @@ var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 var key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 var key_jump = keyboard_check_pressed(vk_space);
 var key_fall = keyboard_check_pressed(ord("S"));
+var key_sheild = keyboard_check(vk_shift);
+
 // Calculate movement
 var move = key_right - key_left;
 
@@ -15,7 +17,6 @@ if(_grounded) {
 else { // Airborne
 	_horizontalSpeed = RubeHorizontalMovement(_horizontalSpeed, move, _airSpeed, _airSpeedSoftCap, _airSpeedHardCap, _airSpeedFriction);
 }
-
 
 // Vertical movement
 _verticalSpeed += _gravity * global.deltaSq; // Gravity
@@ -56,6 +57,25 @@ if(key_jump)
 
 if(key_fall) {
 	_flying = false;	
+}
+
+
+
+if(!_shieldOn) {
+	if(key_sheild) {
+		_shieldOn = true;
+		_objShield = instance_create_layer(x,y,"Instances",obj_ShieldTest);
+	}
+}
+else {
+	if(key_sheild) {
+		_objShield.x = x;
+		_objShield.y = y;
+	}
+	else {
+		_shieldOn = false;
+		instance_destroy(_objShield);
+	}
 }
 
 // Horizontal collision
@@ -108,13 +128,13 @@ else
 
 
 // Flip
-if(_facingRight &&  _horizontalSpeed < 0) 
+if(_facingRight &&  move < 0) 
 {
 	_facingRight = false;
 	x--;
 	image_xscale = -1;
 }
-else if (!_facingRight &&  _horizontalSpeed > 0)
+else if (!_facingRight &&  move > 0)
 {
 	_facingRight = true;
 	x++;

@@ -6,13 +6,13 @@
     "For3D": false,
     "HTile": false,
     "VTile": false,
-    "bbox_bottom": 22,
-    "bbox_left": 13,
-    "bbox_right": 18,
-    "bbox_top": 10,
+    "bbox_bottom": 30,
+    "bbox_left": 1,
+    "bbox_right": 30,
+    "bbox_top": 1,
     "bboxmode": 2,
-    "colkind": 1,
-    "coltolerance": 0,
+    "colkind": 2,
+    "coltolerance": 239,
     "edgeFiltering": false,
     "frames": [
         {
@@ -183,7 +183,7 @@
             "blendMode": 0,
             "isLocked": false,
             "name": "Layer 1",
-            "opacity": 20,
+            "opacity": 40,
             "visible": true
         },
         {

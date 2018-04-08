@@ -27,8 +27,10 @@ _flightTime = 15.0;
 _flightActivateCost = 1.5;
 _flightMeter = 1.0;
 
-
 _flying = false;
 _grounded = false;
+_shieldOn = false;
+
+_objShield = noone;
 
 _facingRight = true;

@@ -119,6 +119,14 @@
             }
         },
         {
+            "Key": "74d53973-4ac2-446e-ac51-43511eef1d03",
+            "Value": {
+                "id": "46b917c2-1b83-4c5c-87f2-3631151ede7a",
+                "resourcePath": "objects\\obj_ShieldTest\\obj_ShieldTest.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "74d54004-9f98-4771-bfe8-ef13ea66b9f8",
             "Value": {
                 "id": "f478fd2f-e30a-4451-b860-a1c11051534e",

@@ -7,13 +7,13 @@
 	var aSpeedHardCap = argument4;
 	var aFriction = argument5;
 
-	var pastSoftCap = (aMove > 0 && aCurrentSpeed >= aSpeedSoftCap * global.delta) 
-		|| (aMove < 0 && aCurrentSpeed <= -aSpeedSoftCap * global.delta);
+	var pastRightSoftCap = (aCurrentSpeed >= aSpeedSoftCap * global.delta);
+	var pastLeftSoftCap = (aCurrentSpeed <= -aSpeedSoftCap * global.delta);
 	
 	// Add friction if past softcap
 	// Friction added relative to anlogue movement, set friction to 1 if past cap
 	var frictionMultiplier = 1 - abs(aMove);
-    if(pastSoftCap)
+    if(pastLeftSoftCap || pastRightSoftCap)
 		frictionMultiplier = 1;
 	
 	var frictionForce = 0;
@@ -27,20 +27,15 @@
         aCurrentSpeed = min(aCurrentSpeed + frictionForce, 0);
     } 
 	
-	
-	
 	// Now it's time to allow user to add movement speed
     // Only allow extra speed if below softcap and make sure it never adds more than the softcap
-    if(!pastSoftCap) 
-	{
-		var movementForce = aMove * aMovementSpeed * global.deltaSq;
+	var movementForce = aMove * aMovementSpeed * global.deltaSq;
+    
+	if(movementForce > 0 && !pastRightSoftCap)
+		aCurrentSpeed = min(aCurrentSpeed + movementForce, aSpeedSoftCap * global.delta);
+	else if (movementForce < 0 && !pastLeftSoftCap)
+		aCurrentSpeed = max(aCurrentSpeed + movementForce, -aSpeedSoftCap * global.delta);
 		
-		// Add these 2
-		// * Current speed
-		// * Movement force from user input
-		aCurrentSpeed = clamp(aCurrentSpeed + movementForce, -aSpeedSoftCap * global.delta, aSpeedSoftCap * global.delta);
-    }
-
     // Hardcap speed so speed is NEVER above the hardcap
     aCurrentSpeed = clamp(aCurrentSpeed, -aSpeedHardCap * global.delta, aSpeedHardCap * global.delta);
 	
