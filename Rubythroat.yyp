@@ -111,10 +111,18 @@
             }
         },
         {
+            "Key": "4f38d4d9-01cc-4c76-9177-fef611f91774",
+            "Value": {
+                "id": "e8da9b1e-c3e6-4c7a-9aa3-784a07b9a63d",
+                "resourcePath": "objects\\obj_Sprite\\obj_Sprite.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "51ba85c2-94ca-461f-9745-e4f5ab1c2179",
             "Value": {
                 "id": "4b03728d-beb5-4d0a-887d-16233f0cbd33",
-                "resourcePath": "objects\\obj_background\\obj_background.yy",
+                "resourcePath": "objects\\obj_Background\\obj_Background.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -172,6 +180,14 @@
                 "id": "c9402f5d-4c5a-4c2b-9680-bccc0f027b63",
                 "resourcePath": "sprites\\spr_RubeFly\\spr_RubeFly.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "8c103003-e691-4ebd-a050-db49bfa5de3e",
+            "Value": {
+                "id": "7dce97f4-4d15-4e9a-875a-096b7d4475c8",
+                "resourcePath": "scripts\\Approach\\Approach.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -250,7 +266,7 @@
             "Key": "c1e18e56-b259-41f5-9cef-ebb3dfcc8ceb",
             "Value": {
                 "id": "03cd26fd-f34f-48dc-b248-a0a9543551d0",
-                "resourcePath": "objects\\obj_global_vars\\obj_global_vars.yy",
+                "resourcePath": "objects\\obj_Global_vars\\obj_Global_vars.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -282,7 +298,7 @@
             "Key": "d17822a7-2756-4155-9ee5-6738f8a45c77",
             "Value": {
                 "id": "c5906672-5f89-4763-a44a-b751d691c9af",
-                "resourcePath": "objects\\obj_wall\\obj_wall.yy",
+                "resourcePath": "objects\\obj_Wall\\obj_Wall.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -344,7 +360,8 @@
         }
     ],
     "script_order": [
-        "f8268979-693f-459c-bd27-93636917c1ec"
+        "f8268979-693f-459c-bd27-93636917c1ec",
+        "8c103003-e691-4ebd-a050-db49bfa5de3e"
     ],
     "tutorial": "com.YoYoGames.GMBasicsTheImageEditor"
 }

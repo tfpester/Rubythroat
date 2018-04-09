@@ -10,17 +10,17 @@ var key_sheild = keyboard_check(vk_shift);
 
 // Calculate movement
 var move = key_right - key_left;
-if(_facingRight &&  move < 0) 
+if(_facingRight && move < 0) 
 {
 	_facingRight = false;
-	x -= 1;
 	image_xscale = -1;
+	x -= 1;
 }
-else if (!_facingRight &&  move > 0)
+else if (!_facingRight && move > 0)
 {
 	_facingRight = true;
-	x += 1;
 	image_xscale = 1;
+	x += 1;
 }
 
 if(_grounded) {
@@ -34,7 +34,7 @@ else { // Airborne
 _verticalSpeed += _gravity * global.deltaSq; // Gravity
 
 // Jump
-_grounded = place_meeting(x, y+1, obj_wall);
+_grounded = place_meeting(x, y+1, obj_Wall);
 
 if(_grounded) {
 	_flying = false;
@@ -91,20 +91,27 @@ else {
 }
 
 // Horizontal collision
-if(place_meeting(x+_horizontalSpeed, y, obj_wall)) 
+if(place_meeting(x+_horizontalSpeed, y, obj_Wall)) 
 {
-	while(!place_meeting(x+sign(_horizontalSpeed), y, obj_wall))
+	// Climb slope
+	if(!place_meeting(x+_horizontalSpeed, y-1, obj_Wall))
 	{
-		x += sign(_horizontalSpeed);
+		y -= 1;
 	}
-	_horizontalSpeed = 0;
+	else {
+		while(!place_meeting(x+sign(_horizontalSpeed), y, obj_Wall))
+		{
+			x += sign(_horizontalSpeed);
+		}
+		_horizontalSpeed = 0;
+	}
 }
 x += _horizontalSpeed;
 
 // Vertical collision
-if(place_meeting(x, y+_verticalSpeed, obj_wall)) 
+if(place_meeting(x, y+_verticalSpeed, obj_Wall)) 
 {
-	while(!place_meeting(x, y+sign(_verticalSpeed), obj_wall))
+	while(!place_meeting(x, y+sign(_verticalSpeed), obj_Wall))
 	{
 		y += sign(_verticalSpeed);
 	}

@@ -1,14 +1,23 @@
 {
-    "id": "d17822a7-2756-4155-9ee5-6738f8a45c77",
+    "id": "4f38d4d9-01cc-4c76-9177-fef611f91774",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "obj_Wall",
+    "name": "obj_Sprite",
     "eventList": [
-        
+        {
+            "id": "b7d357f1-f914-4ca0-b769-981936f033af",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
+            "enumb": 0,
+            "eventtype": 8,
+            "m_owner": "4f38d4d9-01cc-4c76-9177-fef611f91774"
+        }
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,
-    "parentObjectId": "4f38d4d9-01cc-4c76-9177-fef611f91774",
+    "parentObjectId": "00000000-0000-0000-0000-000000000000",
     "persistent": false,
     "physicsAngularDamping": 0.1,
     "physicsDensity": 0.5,
